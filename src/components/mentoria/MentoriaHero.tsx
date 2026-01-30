@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle, Star } from "lucide-react";
 import logo from "@/assets/logo.png";
+import mentoriaHeroImg from "@/assets/mentoria-hero.jpg";
 
 const MentoriaHero = () => {
   const scrollToPlanos = () => {
@@ -64,19 +65,15 @@ const MentoriaHero = () => {
             </div>
           </div>
           
-          {/* Image/Video placeholder */}
+          {/* Image */}
           <div className="flex-1 max-w-md lg:max-w-lg">
             <div className="relative">
-              <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-2xl p-8 border border-primary-foreground/20">
-                <div className="aspect-square bg-gradient-to-br from-secondary/20 to-primary-foreground/10 rounded-xl flex items-center justify-center">
-                  <div className="text-center text-primary-foreground">
-                    <div className="w-24 h-24 bg-primary-foreground/20 rounded-full mx-auto mb-4 flex items-center justify-center">
-                      <span className="text-4xl">👤</span>
-                    </div>
-                    <p className="text-lg font-semibold">Eriksen</p>
-                    <p className="text-sm opacity-80">Mentor de Negócios</p>
-                  </div>
-                </div>
+              <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-2xl p-4 border border-primary-foreground/20 overflow-hidden">
+                <img 
+                  src={mentoriaHeroImg} 
+                  alt="Empreendedora em consultoria de negócios" 
+                  className="w-full h-auto rounded-xl object-cover aspect-square"
+                />
               </div>
               {/* Decorative elements */}
               <div className="absolute -top-4 -right-4 w-20 h-20 bg-secondary/30 rounded-full blur-xl"></div>
