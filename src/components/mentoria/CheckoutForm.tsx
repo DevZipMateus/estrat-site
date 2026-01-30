@@ -267,14 +267,13 @@ const CheckoutForm = ({ initialPlan = "crescimento", onBack, onSuccess }: Checko
                 disabled={isSubmitting}
                 className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground h-auto min-h-12 sm:min-h-14 py-3 sm:py-4 px-4 sm:px-6 rounded-xl shadow-md hover:shadow-strong transition-all duration-200 text-sm sm:text-base md:text-lg font-extrabold group"
               >
-                {isSubmitting ? (
-                  "Enviando..."
-                ) : (
-                  <span className="flex items-center gap-2">
-                    <MessageCircle className="w-5 h-5" />
-                    QUERO MAIS INFORMAÇÕES NO WHATSAPP
-                  </span>
-                )}
+              {isSubmitting ? (
+                "Enviando..."
+              ) : (
+                <span className="flex items-center gap-2">
+                  FINALIZAR PEDIDO
+                </span>
+              )}
               </Button>
 
               <p className="text-xs text-muted-foreground text-center">
