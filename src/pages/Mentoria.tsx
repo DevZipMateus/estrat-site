@@ -16,11 +16,12 @@ import MentoriaCTAFinal from "@/components/mentoria/MentoriaCTAFinal";
 import MentoriaFooter from "@/components/mentoria/MentoriaFooter";
 import MentoriaUrgencyBar from "@/components/mentoria/MentoriaUrgencyBar";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import WebinarCTA from "@/components/mentoria/WebinarCTA";
 import WebinarRegistrationForm from "@/components/mentoria/WebinarRegistrationForm";
 import WebinarConfirmation from "@/components/mentoria/WebinarConfirmation";
 import CheckoutForm from "@/components/mentoria/CheckoutForm";
 
-type ViewState = "landing" | "webinar-confirmation" | "checkout";
+type ViewState = "landing" | "webinar-form" | "webinar-confirmation" | "checkout";
 
 interface WebinarData {
   nome: string;
@@ -55,6 +56,18 @@ const Mentoria = () => {
     );
     window.open(`https://wa.me/5561999840109?text=${mensagem}`, '_blank');
   };
+
+  if (currentView === "webinar-form") {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <WebinarRegistrationForm 
+          onSuccess={handleWebinarSuccess}
+          onBack={() => setCurrentView("landing")}
+        />
+      </div>
+    );
+  }
 
   if (currentView === "webinar-confirmation" && webinarData) {
     return (
@@ -91,7 +104,10 @@ const Mentoria = () => {
       <MentoriaParaQuem />
       <MentoriaModulos />
       <MentoriaFormato />
-      <WebinarRegistrationForm onSuccess={handleWebinarSuccess} />
+      <WebinarCTA onOpenForm={() => {
+        setCurrentView("webinar-form");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }} />
       <MentoriaPlanos onSelectPlan={handleSelectPlan} />
       <MentoriaBonus />
       <MentoriaGarantia />

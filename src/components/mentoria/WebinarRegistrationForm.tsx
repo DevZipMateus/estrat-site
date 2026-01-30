@@ -12,7 +12,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { ArrowRight, CheckCircle, Users, Clock, Calendar } from "lucide-react";
+import { ArrowRight, ArrowLeft, CheckCircle, Users, Clock, Calendar } from "lucide-react";
 
 const webinarFormSchema = z.object({
   nome: z
@@ -42,9 +42,10 @@ type WebinarFormData = z.infer<typeof webinarFormSchema>;
 
 interface WebinarRegistrationFormProps {
   onSuccess: (data: WebinarFormData) => void;
+  onBack?: () => void;
 }
 
-const WebinarRegistrationForm = ({ onSuccess }: WebinarRegistrationFormProps) => {
+const WebinarRegistrationForm = ({ onSuccess, onBack }: WebinarRegistrationFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<WebinarFormData>({
@@ -66,9 +67,21 @@ const WebinarRegistrationForm = ({ onSuccess }: WebinarRegistrationFormProps) =>
   };
 
   return (
-    <section id="webinar-form" className="py-12 sm:py-16 md:py-20 bg-gradient-hero">
+    <section id="webinar-form" className="py-12 sm:py-16 md:py-20 bg-gradient-hero min-h-screen">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
+          {/* Back button */}
+          {onBack && (
+            <Button
+              variant="ghost"
+              onClick={onBack}
+              className="mb-4 sm:mb-6 text-primary-foreground/80 hover:text-primary-foreground hover:bg-primary-foreground/10 text-sm sm:text-base"
+            >
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Voltar
+            </Button>
+          )}
+          
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left side - Benefits */}
             <div className="text-primary-foreground order-2 lg:order-1">
