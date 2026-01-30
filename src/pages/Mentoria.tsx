@@ -104,10 +104,6 @@ const Mentoria = () => {
       <MentoriaParaQuem />
       <MentoriaModulos />
       <MentoriaFormato />
-      <WebinarCTA onOpenForm={() => {
-        setCurrentView("webinar-form");
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }} />
       <MentoriaPlanos onSelectPlan={handleSelectPlan} />
       <MentoriaBonus />
       <MentoriaGarantia />
