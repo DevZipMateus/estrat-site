@@ -1,6 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Star, Shield, CreditCard, Users } from "lucide-react";
 
+interface MentoriaPlanosProps {
+  onSelectPlan?: (planId: string) => void;
+}
+
 const planos = [
   {
     nome: "PLANO ESSENCIAL",
@@ -55,12 +59,11 @@ const planos = [
   },
 ];
 
-const MentoriaPlanos = () => {
-  const handlePlanClick = (planoNome: string, preco: string) => {
-    const mensagem = encodeURIComponent(
-      `Olá! Tenho interesse no ${planoNome} da Mentoria Crescimento Estratégico 90 Dias (${preco}). Gostaria de mais informações!`
-    );
-    window.open(`https://wa.me/5561999840109?text=${mensagem}`, '_blank');
+const MentoriaPlanos = ({ onSelectPlan }: MentoriaPlanosProps) => {
+  const handlePlanClick = (planoId: string) => {
+    if (onSelectPlan) {
+      onSelectPlan(planoId);
+    }
   };
 
   return (
@@ -127,7 +130,9 @@ const MentoriaPlanos = () => {
                 </p>
                 
                 <Button 
-                  onClick={() => handlePlanClick(plano.nome, plano.preco)}
+                  onClick={() => handlePlanClick(
+                    index === 0 ? "essencial" : index === 1 ? "crescimento" : "transformacao"
+                  )}
                   className={`w-full py-5 sm:py-6 text-base sm:text-lg font-bold ${
                     plano.destaque 
                       ? "bg-secondary hover:bg-secondary/90 text-secondary-foreground" 

@@ -29,9 +29,18 @@ interface WebinarData {
   cidade: string;
 }
 
+type PlanId = "essencial" | "crescimento" | "transformacao";
+
 const Mentoria = () => {
   const [currentView, setCurrentView] = useState<ViewState>("landing");
   const [webinarData, setWebinarData] = useState<WebinarData | null>(null);
+  const [selectedPlan, setSelectedPlan] = useState<PlanId>("crescimento");
+
+  const handleSelectPlan = (planId: string) => {
+    setSelectedPlan(planId as PlanId);
+    setCurrentView("checkout");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const handleWebinarSuccess = (data: WebinarData) => {
     setWebinarData(data);
@@ -64,6 +73,7 @@ const Mentoria = () => {
       <div className="min-h-screen bg-background">
         <Header />
         <CheckoutForm
+          initialPlan={selectedPlan}
           onBack={() => setCurrentView("landing")}
           onSuccess={handleCheckoutSuccess}
         />
@@ -82,7 +92,7 @@ const Mentoria = () => {
       <MentoriaModulos />
       <MentoriaFormato />
       <WebinarRegistrationForm onSuccess={handleWebinarSuccess} />
-      <MentoriaPlanos />
+      <MentoriaPlanos onSelectPlan={handleSelectPlan} />
       <MentoriaBonus />
       <MentoriaGarantia />
       <MentoriaMentor />
