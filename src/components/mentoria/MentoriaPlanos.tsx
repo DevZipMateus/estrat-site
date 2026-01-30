@@ -56,6 +56,13 @@ const planos = [
 ];
 
 const MentoriaPlanos = () => {
+  const handlePlanClick = (planoNome: string, preco: string) => {
+    const mensagem = encodeURIComponent(
+      `Olá! Tenho interesse no ${planoNome} da Mentoria Crescimento Estratégico 90 Dias (${preco}). Gostaria de mais informações!`
+    );
+    window.open(`https://wa.me/5561999840109?text=${mensagem}`, '_blank');
+  };
+
   return (
     <section id="planos" className="py-20 bg-background">
       <div className="container mx-auto px-4">
@@ -120,6 +127,7 @@ const MentoriaPlanos = () => {
                 </p>
                 
                 <Button 
+                  onClick={() => handlePlanClick(plano.nome, plano.preco)}
                   className={`w-full py-6 text-lg font-bold ${
                     plano.destaque 
                       ? "bg-secondary hover:bg-secondary/90 text-secondary-foreground" 
