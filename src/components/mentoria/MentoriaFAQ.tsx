@@ -58,25 +58,25 @@ const perguntas = [
 
 const MentoriaFAQ = () => {
   return (
-    <section className="py-20 bg-muted">
-      <div className="container mx-auto px-4">
+    <section className="py-12 sm:py-16 md:py-20 bg-muted">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground text-center mb-8 sm:mb-12">
             Perguntas Frequentes
           </h2>
           
-          <Accordion type="single" collapsible className="space-y-4">
+          <Accordion type="single" collapsible className="space-y-3 sm:space-y-4">
             {perguntas.map((item, index) => (
               <AccordionItem 
                 key={index} 
                 value={`faq-${index}`}
-                className="bg-background rounded-xl border border-border shadow-soft px-6"
+                className="bg-background rounded-lg sm:rounded-xl border border-border shadow-soft px-4 sm:px-6"
               >
-                <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-5">
-                  <span className="text-base">❓ {item.pergunta}</span>
+                <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-4 sm:py-5">
+                  <span className="text-sm sm:text-base pr-2">❓ {item.pergunta}</span>
                 </AccordionTrigger>
-                <AccordionContent className="pb-5">
-                  <p className="text-muted-foreground">→ {item.resposta}</p>
+                <AccordionContent className="pb-4 sm:pb-5">
+                  <p className="text-muted-foreground text-sm sm:text-base">→ {item.resposta}</p>
                 </AccordionContent>
               </AccordionItem>
             ))}
