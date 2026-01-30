@@ -1,4 +1,5 @@
 import { Award, Clock, Users, Star } from "lucide-react";
+import mentorPhoto from "@/assets/mentor-photo.jpg";
 
 const credenciais = [
   { icon: Users, label: "Mais de 100 empresas consultadas" },
@@ -17,15 +18,14 @@ const MentoriaMentor = () => {
           </h2>
           
           <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-10 lg:gap-12">
-            {/* Foto placeholder */}
+            {/* Foto do mentor */}
             <div className="flex-shrink-0">
-              <div className="w-48 h-48 sm:w-56 md:w-64 lg:w-80 sm:h-56 md:h-64 lg:h-80 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center border-4 border-primary/20 shadow-strong">
-                <div className="text-center">
-                  <div className="w-16 h-16 sm:w-20 md:w-24 sm:h-20 md:h-24 bg-primary/20 rounded-full mx-auto mb-3 sm:mb-4 flex items-center justify-center">
-                    <span className="text-3xl sm:text-4xl md:text-5xl">👤</span>
-                  </div>
-                  <p className="text-muted-foreground text-xs sm:text-sm">Foto do Mentor</p>
-                </div>
+              <div className="w-48 h-48 sm:w-56 md:w-64 lg:w-80 sm:h-56 md:h-64 lg:h-80 rounded-xl sm:rounded-2xl overflow-hidden border-4 border-primary/20 shadow-strong">
+                <img 
+                  src={mentorPhoto} 
+                  alt="Eriksen - Consultor Empresarial e Mentor de Negócios" 
+                  className="w-full h-full object-cover object-top"
+                />
               </div>
             </div>
             
