@@ -64,28 +64,28 @@ const MentoriaPlanos = () => {
   };
 
   return (
-    <section id="planos" className="py-20 bg-background">
-      <div className="container mx-auto px-4">
+    <section id="planos" className="py-12 sm:py-16 md:py-20 bg-background">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground text-center mb-3 sm:mb-4">
             Escolha o Plano Ideal Para o Momento do Seu Negócio
           </h2>
-          <p className="text-xl text-muted-foreground text-center mb-12">
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground text-center mb-8 sm:mb-12">
             Todos os planos incluem garantia incondicional de 7 dias
           </p>
           
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {planos.map((plano, index) => (
               <div 
                 key={index}
-                className={`relative rounded-2xl p-8 border-2 ${
+                className={`relative rounded-xl sm:rounded-2xl p-6 sm:p-8 border-2 ${
                   plano.destaque 
-                    ? "border-secondary bg-secondary/5 shadow-strong scale-105" 
+                    ? "border-secondary bg-secondary/5 shadow-strong lg:scale-105" 
                     : "border-border bg-card shadow-medium"
                 }`}
               >
                 {plano.badge && (
-                  <div className={`absolute -top-4 left-1/2 transform -translate-x-1/2 px-4 py-1 rounded-full text-sm font-bold ${
+                  <div className={`absolute -top-3 sm:-top-4 left-1/2 transform -translate-x-1/2 px-3 sm:px-4 py-1 rounded-full text-xs sm:text-sm font-bold whitespace-nowrap ${
                     plano.destaque 
                       ? "bg-secondary text-secondary-foreground" 
                       : "bg-primary text-primary-foreground"
@@ -94,24 +94,24 @@ const MentoriaPlanos = () => {
                   </div>
                 )}
                 
-                <h3 className="text-xl font-bold text-foreground text-center mb-4 mt-2">
+                <h3 className="text-lg sm:text-xl font-bold text-foreground text-center mb-3 sm:mb-4 mt-2">
                   {plano.nome}
                 </h3>
                 
-                <div className="text-center mb-6">
-                  <p className="text-4xl font-bold text-primary">{plano.preco}</p>
-                  <p className="text-muted-foreground">{plano.parcela}</p>
+                <div className="text-center mb-4 sm:mb-6">
+                  <p className="text-3xl sm:text-4xl font-bold text-primary">{plano.preco}</p>
+                  <p className="text-sm sm:text-base text-muted-foreground">{plano.parcela}</p>
                 </div>
                 
-                <ul className="space-y-3 mb-6">
+                <ul className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
                   {plano.beneficios.map((beneficio, beneficioIndex) => (
-                    <li key={beneficioIndex} className="flex items-start gap-3">
-                      <CheckCircle className={`w-5 h-5 flex-shrink-0 mt-0.5 ${
+                    <li key={beneficioIndex} className="flex items-start gap-2 sm:gap-3">
+                      <CheckCircle className={`w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 mt-0.5 ${
                         beneficioIndex === 0 && index > 0 
                           ? "text-secondary" 
                           : "text-primary"
                       }`} />
-                      <span className={`text-sm ${
+                      <span className={`text-xs sm:text-sm ${
                         beneficioIndex === 0 && index > 0 
                           ? "font-semibold text-foreground" 
                           : "text-muted-foreground"
@@ -122,13 +122,13 @@ const MentoriaPlanos = () => {
                   ))}
                 </ul>
                 
-                <p className="text-sm text-muted-foreground text-center mb-6 italic">
+                <p className="text-xs sm:text-sm text-muted-foreground text-center mb-4 sm:mb-6 italic">
                   {plano.ideal}
                 </p>
                 
                 <Button 
                   onClick={() => handlePlanClick(plano.nome, plano.preco)}
-                  className={`w-full py-6 text-lg font-bold ${
+                  className={`w-full py-5 sm:py-6 text-base sm:text-lg font-bold ${
                     plano.destaque 
                       ? "bg-secondary hover:bg-secondary/90 text-secondary-foreground" 
                       : "bg-primary hover:bg-primary/90"
@@ -141,29 +141,29 @@ const MentoriaPlanos = () => {
           </div>
           
           {/* Urgência e segurança */}
-          <div className="mt-12 space-y-6">
-            <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2 bg-muted px-4 py-2 rounded-full">
-                <Users className="w-4 h-4 text-secondary" />
+          <div className="mt-8 sm:mt-12 space-y-4 sm:space-y-6">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-4 text-xs sm:text-sm text-muted-foreground">
+              <div className="flex items-center gap-2 bg-muted px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
+                <Users className="w-3 h-3 sm:w-4 sm:h-4 text-secondary" />
                 <span>Vagas limitadas por turma</span>
               </div>
-              <div className="flex items-center gap-2 bg-muted px-4 py-2 rounded-full">
-                <Star className="w-4 h-4 text-secondary" />
+              <div className="flex items-center gap-2 bg-muted px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
+                <Star className="w-3 h-3 sm:w-4 sm:h-4 text-secondary" />
                 <span>85% das vagas preenchidas</span>
               </div>
             </div>
             
-            <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <Shield className="w-5 h-5 text-primary" />
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-6 text-xs sm:text-sm text-muted-foreground">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                 <span>Pagamento 100% seguro</span>
               </div>
-              <div className="flex items-center gap-2">
-                <CreditCard className="w-5 h-5 text-primary" />
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <CreditCard className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                 <span>Aceitamos todos os cartões</span>
               </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-primary" />
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                 <span>Garantia incondicional de 7 dias</span>
               </div>
             </div>

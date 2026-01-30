@@ -56,29 +56,29 @@ const formatos = [
 
 const MentoriaFormato = () => {
   return (
-    <section className="py-20 bg-muted">
-      <div className="container mx-auto px-4">
+    <section className="py-12 sm:py-16 md:py-20 bg-muted">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground text-center mb-3 sm:mb-4">
             Como Funciona a Mentoria
           </h2>
-          <p className="text-xl text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground text-center mb-8 sm:mb-12 max-w-3xl mx-auto">
             3 meses de imersão com acompanhamento próximo, ferramentas práticas e uma comunidade de empreendedoras que, assim como você, querem crescer de forma estruturada.
           </p>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {formatos.map((formato, index) => (
               <div 
                 key={index}
-                className="bg-background rounded-2xl p-6 shadow-soft border border-border"
+                className="bg-background rounded-xl sm:rounded-2xl p-5 sm:p-6 shadow-soft border border-border"
               >
-                <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
-                  <formato.icon className="w-7 h-7 text-primary" />
+                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-primary/10 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4">
+                  <formato.icon className="w-6 h-6 sm:w-7 sm:h-7 text-primary" />
                 </div>
-                <h3 className="text-lg font-bold text-foreground mb-4">{formato.titulo}</h3>
-                <ul className="space-y-2">
+                <h3 className="text-base sm:text-lg font-bold text-foreground mb-3 sm:mb-4">{formato.titulo}</h3>
+                <ul className="space-y-1.5 sm:space-y-2">
                   {formato.descricao.map((item, itemIndex) => (
-                    <li key={itemIndex} className="flex items-start gap-2 text-muted-foreground text-sm">
+                    <li key={itemIndex} className="flex items-start gap-2 text-muted-foreground text-xs sm:text-sm">
                       <span className="text-secondary mt-0.5">→</span>
                       <span>{item}</span>
                     </li>

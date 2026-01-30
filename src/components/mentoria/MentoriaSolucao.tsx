@@ -34,39 +34,39 @@ const MentoriaSolucao = () => {
   };
 
   return (
-    <section className="py-20 bg-background">
-      <div className="container mx-auto px-4">
+    <section className="py-12 sm:py-16 md:py-20 bg-background">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4">
             Apresentando: Mentoria Crescimento Estratégico 90 Dias
           </h2>
-          <p className="text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 sm:mb-12 max-w-3xl mx-auto">
             O método completo para estruturar, organizar e escalar seu negócio em apenas 3 meses
           </p>
           
           {/* Video placeholder */}
-          <div className="bg-muted rounded-2xl p-8 mb-12 max-w-3xl mx-auto">
-            <div className="aspect-video bg-gradient-to-br from-primary/10 to-secondary/10 rounded-xl flex items-center justify-center border-2 border-dashed border-primary/30">
-              <div className="text-center">
-                <div className="w-20 h-20 bg-primary/20 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <span className="text-3xl">▶️</span>
+          <div className="bg-muted rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 mb-8 sm:mb-12 max-w-3xl mx-auto">
+            <div className="aspect-video bg-gradient-to-br from-primary/10 to-secondary/10 rounded-lg sm:rounded-xl flex items-center justify-center border-2 border-dashed border-primary/30">
+              <div className="text-center p-4">
+                <div className="w-14 h-14 sm:w-16 md:w-20 sm:h-16 md:h-20 bg-primary/20 rounded-full mx-auto mb-3 sm:mb-4 flex items-center justify-center">
+                  <span className="text-2xl sm:text-3xl">▶️</span>
                 </div>
-                <p className="text-muted-foreground">Vídeo de apresentação da mentoria</p>
+                <p className="text-muted-foreground text-sm sm:text-base">Vídeo de apresentação da mentoria</p>
               </div>
             </div>
           </div>
           
           {/* 3 Pilares */}
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12">
             {fases.map((fase, index) => (
               <div key={index} className="relative">
-                <div className="bg-card rounded-2xl p-8 shadow-medium border border-border h-full">
-                  <div className={`w-16 h-16 ${fase.color} rounded-full flex items-center justify-center mx-auto mb-6`}>
-                    <fase.icon className="w-8 h-8 text-primary-foreground" />
+                <div className="bg-card rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-medium border border-border h-full">
+                  <div className={`w-12 h-12 sm:w-14 md:w-16 sm:h-14 md:h-16 ${fase.color} rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6`}>
+                    <fase.icon className="w-6 h-6 sm:w-7 md:w-8 sm:h-7 md:h-8 text-primary-foreground" />
                   </div>
-                  <div className="text-sm font-bold text-secondary mb-2">{fase.mes}</div>
-                  <h3 className="text-2xl font-bold text-foreground mb-4">{fase.titulo}</h3>
-                  <p className="text-muted-foreground">{fase.descricao}</p>
+                  <div className="text-xs sm:text-sm font-bold text-secondary mb-2">{fase.mes}</div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-3 sm:mb-4">{fase.titulo}</h3>
+                  <p className="text-sm sm:text-base text-muted-foreground">{fase.descricao}</p>
                 </div>
                 {index < 2 && (
                   <div className="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2">
@@ -80,9 +80,10 @@ const MentoriaSolucao = () => {
           <Button 
             size="lg" 
             onClick={scrollToPlanos}
-            className="bg-secondary hover:bg-secondary/90 text-secondary-foreground px-10 py-6 text-lg font-bold group"
+            className="bg-secondary hover:bg-secondary/90 text-secondary-foreground px-6 sm:px-8 md:px-10 py-5 sm:py-6 text-base sm:text-lg font-bold group w-full sm:w-auto"
           >
-            QUERO TRANSFORMAR MEU NEGÓCIO EM 90 DIAS
+            <span className="hidden sm:inline">QUERO TRANSFORMAR MEU NEGÓCIO EM 90 DIAS</span>
+            <span className="sm:hidden">TRANSFORMAR MEU NEGÓCIO</span>
             <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
           </Button>
         </div>

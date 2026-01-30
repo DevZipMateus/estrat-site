@@ -12,27 +12,27 @@ const problemas = [
 
 const MentoriaProblema = () => {
   return (
-    <section className="py-20 bg-muted">
-      <div className="container mx-auto px-4">
+    <section className="py-12 sm:py-16 md:py-20 bg-muted">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-8 sm:mb-12">
             Você Se Reconhece em Alguma Dessas Situações?
           </h2>
           
-          <div className="grid gap-4 md:gap-6 text-left max-w-3xl mx-auto">
+          <div className="grid gap-3 sm:gap-4 md:gap-6 text-left max-w-3xl mx-auto">
             {problemas.map((problema, index) => (
               <div 
                 key={index}
-                className="flex items-start gap-4 bg-background p-5 rounded-lg shadow-soft border border-destructive/20"
+                className="flex items-start gap-3 sm:gap-4 bg-background p-4 sm:p-5 rounded-lg shadow-soft border border-destructive/20"
               >
-                <XCircle className="w-6 h-6 text-destructive flex-shrink-0 mt-0.5" />
-                <p className="text-foreground text-lg">{problema}</p>
+                <XCircle className="w-5 h-5 sm:w-6 sm:h-6 text-destructive flex-shrink-0 mt-0.5" />
+                <p className="text-foreground text-sm sm:text-base md:text-lg">{problema}</p>
               </div>
             ))}
           </div>
           
-          <div className="mt-12 p-6 bg-primary/10 rounded-xl border border-primary/20">
-            <p className="text-xl md:text-2xl font-semibold text-primary">
+          <div className="mt-8 sm:mt-12 p-4 sm:p-6 bg-primary/10 rounded-xl border border-primary/20">
+            <p className="text-lg sm:text-xl md:text-2xl font-semibold text-primary">
               Se você respondeu SIM para pelo menos 2 dessas situações, essa mentoria foi feita para você.
             </p>
           </div>

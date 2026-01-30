@@ -66,82 +66,82 @@ const WebinarRegistrationForm = ({ onSuccess }: WebinarRegistrationFormProps) =>
   };
 
   return (
-    <section id="webinar-form" className="py-20 bg-gradient-hero">
-      <div className="container mx-auto px-4">
+    <section id="webinar-form" className="py-12 sm:py-16 md:py-20 bg-gradient-hero">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left side - Benefits */}
-            <div className="text-primary-foreground">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            <div className="text-primary-foreground order-2 lg:order-1">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-center lg:text-left">
                 Inscreva-se no Webinar Gratuito
               </h2>
-              <p className="text-lg text-primary-foreground/90 mb-8">
+              <p className="text-base sm:text-lg text-primary-foreground/90 mb-6 sm:mb-8 text-center lg:text-left">
                 Descubra os 3 pilares que toda empreendedora precisa dominar para ter um negócio estruturado, lucrativo e escalável.
               </p>
 
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center">
-                    <Calendar className="w-5 h-5 text-secondary" />
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0">
+                    <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-secondary" />
                   </div>
                   <div>
-                    <p className="font-semibold">Data a definir</p>
-                    <p className="text-sm text-primary-foreground/80">Aula ao vivo e exclusiva</p>
+                    <p className="font-semibold text-sm sm:text-base">Data a definir</p>
+                    <p className="text-xs sm:text-sm text-primary-foreground/80">Aula ao vivo e exclusiva</p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center">
-                    <Clock className="w-5 h-5 text-secondary" />
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-secondary" />
                   </div>
                   <div>
-                    <p className="font-semibold">19h (horário de Brasília)</p>
-                    <p className="text-sm text-primary-foreground/80">Duração aproximada: 1h30</p>
+                    <p className="font-semibold text-sm sm:text-base">19h (horário de Brasília)</p>
+                    <p className="text-xs sm:text-sm text-primary-foreground/80">Duração aproximada: 1h30</p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center">
-                    <Users className="w-5 h-5 text-secondary" />
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0">
+                    <Users className="w-4 h-4 sm:w-5 sm:h-5 text-secondary" />
                   </div>
                   <div>
-                    <p className="font-semibold">100% online e gratuito</p>
-                    <p className="text-sm text-primary-foreground/80">Vagas limitadas</p>
+                    <p className="font-semibold text-sm sm:text-base">100% online e gratuito</p>
+                    <p className="text-xs sm:text-sm text-primary-foreground/80">Vagas limitadas</p>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-8 flex flex-wrap gap-2">
-                <div className="flex items-center gap-2 bg-primary-foreground/10 px-3 py-1.5 rounded-full text-sm">
-                  <CheckCircle className="w-4 h-4 text-secondary" />
+              <div className="mt-6 sm:mt-8 flex flex-wrap gap-2 justify-center lg:justify-start">
+                <div className="flex items-center gap-2 bg-primary-foreground/10 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm">
+                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-secondary" />
                   <span>Certificado de participação</span>
                 </div>
-                <div className="flex items-center gap-2 bg-primary-foreground/10 px-3 py-1.5 rounded-full text-sm">
-                  <CheckCircle className="w-4 h-4 text-secondary" />
+                <div className="flex items-center gap-2 bg-primary-foreground/10 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm">
+                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-secondary" />
                   <span>Material exclusivo</span>
                 </div>
               </div>
             </div>
 
             {/* Right side - Form */}
-            <div className="bg-card rounded-2xl p-8 shadow-strong">
-              <h3 className="text-xl font-bold text-foreground text-center mb-6">
+            <div className="bg-card rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 shadow-strong order-1 lg:order-2">
+              <h3 className="text-lg sm:text-xl font-bold text-foreground text-center mb-4 sm:mb-6">
                 Preencha seus dados para participar
               </h3>
 
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+                <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-3 sm:space-y-4">
                   <FormField
                     control={form.control}
                     name="nome"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Nome completo</FormLabel>
+                        <FormLabel className="text-sm sm:text-base">Nome completo</FormLabel>
                         <FormControl>
                           <Input
                             placeholder="Seu nome completo"
                             {...field}
-                            className="h-12"
+                            className="h-10 sm:h-12"
                           />
                         </FormControl>
                         <FormMessage />
@@ -154,13 +154,13 @@ const WebinarRegistrationForm = ({ onSuccess }: WebinarRegistrationFormProps) =>
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>E-mail</FormLabel>
+                        <FormLabel className="text-sm sm:text-base">E-mail</FormLabel>
                         <FormControl>
                           <Input
                             type="email"
                             placeholder="seu@email.com"
                             {...field}
-                            className="h-12"
+                            className="h-10 sm:h-12"
                           />
                         </FormControl>
                         <FormMessage />
@@ -173,13 +173,13 @@ const WebinarRegistrationForm = ({ onSuccess }: WebinarRegistrationFormProps) =>
                     name="whatsapp"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>WhatsApp</FormLabel>
+                        <FormLabel className="text-sm sm:text-base">WhatsApp</FormLabel>
                         <FormControl>
                           <Input
                             type="tel"
                             placeholder="61999999999"
                             {...field}
-                            className="h-12"
+                            className="h-10 sm:h-12"
                           />
                         </FormControl>
                         <FormMessage />
@@ -192,12 +192,12 @@ const WebinarRegistrationForm = ({ onSuccess }: WebinarRegistrationFormProps) =>
                     name="cidade"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Cidade</FormLabel>
+                        <FormLabel className="text-sm sm:text-base">Cidade</FormLabel>
                         <FormControl>
                           <Input
                             placeholder="Sua cidade"
                             {...field}
-                            className="h-12"
+                            className="h-10 sm:h-12"
                           />
                         </FormControl>
                         <FormMessage />
@@ -209,19 +209,20 @@ const WebinarRegistrationForm = ({ onSuccess }: WebinarRegistrationFormProps) =>
                     type="submit"
                     size="lg"
                     disabled={isSubmitting}
-                    className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground h-14 text-lg font-bold group mt-4"
+                    className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground h-12 sm:h-14 text-sm sm:text-base md:text-lg font-bold group mt-2 sm:mt-4"
                   >
                     {isSubmitting ? (
                       "Enviando..."
                     ) : (
                       <>
-                        GARANTIR MINHA VAGA NO WEBINAR GRATUITO
-                        <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                        <span className="hidden sm:inline">GARANTIR MINHA VAGA NO WEBINAR GRATUITO</span>
+                        <span className="sm:hidden">GARANTIR MINHA VAGA</span>
+                        <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-x-1" />
                       </>
                     )}
                   </Button>
 
-                  <p className="text-xs text-muted-foreground text-center mt-4">
+                  <p className="text-xs text-muted-foreground text-center mt-3 sm:mt-4">
                     🔒 Seus dados estão seguros. Não enviamos spam.
                   </p>
                 </form>

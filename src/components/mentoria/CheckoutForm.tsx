@@ -176,31 +176,31 @@ const CheckoutForm = ({ initialPlan = "crescimento", onBack, onSuccess }: Checko
   };
 
   return (
-    <section className="py-20 bg-muted min-h-screen">
-      <div className="container mx-auto px-4">
+    <section className="py-12 sm:py-16 md:py-20 bg-muted min-h-screen">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
           {/* Back button */}
           <Button
             variant="ghost"
             onClick={onBack}
-            className="mb-6 text-muted-foreground"
+            className="mb-4 sm:mb-6 text-muted-foreground text-sm sm:text-base"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Voltar para os planos
           </Button>
 
-          <h1 className="text-3xl font-bold text-foreground text-center mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground text-center mb-6 sm:mb-8">
             Finalizar Inscrição
           </h1>
 
           <Form {...form}>
             <form onSubmit={form.handleSubmit(handleSubmit)}>
-              <div className="grid lg:grid-cols-3 gap-8">
+              <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
                 {/* Left column - Form */}
-                <div className="lg:col-span-2 space-y-8">
+                <div className="lg:col-span-2 space-y-6 sm:space-y-8">
                   {/* Plan selection */}
-                  <div className="bg-card rounded-xl p-6 shadow-medium">
-                    <h2 className="text-xl font-bold text-foreground mb-4">
+                  <div className="bg-card rounded-lg sm:rounded-xl p-4 sm:p-6 shadow-medium">
+                    <h2 className="text-lg sm:text-xl font-bold text-foreground mb-3 sm:mb-4">
                       1. Escolha seu plano
                     </h2>
                     <FormField
@@ -217,7 +217,7 @@ const CheckoutForm = ({ initialPlan = "crescimento", onBack, onSuccess }: Checko
                               {planos.map((plano) => (
                                 <div
                                   key={plano.id}
-                                  className={`relative flex items-start gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${
+                                  className={`relative flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg sm:rounded-xl border-2 cursor-pointer transition-all ${
                                     field.value === plano.id
                                       ? "border-secondary bg-secondary/5"
                                       : "border-border hover:border-primary/50"
@@ -226,7 +226,7 @@ const CheckoutForm = ({ initialPlan = "crescimento", onBack, onSuccess }: Checko
                                 >
                                   {plano.badge && (
                                     <div
-                                      className={`absolute -top-3 right-4 px-3 py-1 rounded-full text-xs font-bold ${
+                                      className={`absolute -top-2 sm:-top-3 right-2 sm:right-4 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs font-bold ${
                                         plano.destaque
                                           ? "bg-secondary text-secondary-foreground"
                                           : "bg-primary text-primary-foreground"
@@ -243,13 +243,13 @@ const CheckoutForm = ({ initialPlan = "crescimento", onBack, onSuccess }: Checko
                                   <div className="flex-1">
                                     <Label
                                       htmlFor={plano.id}
-                                      className="font-bold text-foreground cursor-pointer"
+                                      className="font-bold text-foreground cursor-pointer text-sm sm:text-base"
                                     >
                                       {plano.nome}
                                     </Label>
-                                    <p className="text-lg font-bold text-primary mt-1">
+                                    <p className="text-base sm:text-lg font-bold text-primary mt-1">
                                       {plano.precoFormatado}{" "}
-                                      <span className="text-sm font-normal text-muted-foreground">
+                                      <span className="text-xs sm:text-sm font-normal text-muted-foreground">
                                         {plano.parcela}
                                       </span>
                                     </p>
@@ -265,19 +265,19 @@ const CheckoutForm = ({ initialPlan = "crescimento", onBack, onSuccess }: Checko
                   </div>
 
                   {/* Personal data */}
-                  <div className="bg-card rounded-xl p-6 shadow-medium">
-                    <h2 className="text-xl font-bold text-foreground mb-4">
+                  <div className="bg-card rounded-lg sm:rounded-xl p-4 sm:p-6 shadow-medium">
+                    <h2 className="text-lg sm:text-xl font-bold text-foreground mb-3 sm:mb-4">
                       2. Dados pessoais
                     </h2>
-                    <div className="grid md:grid-cols-2 gap-4">
+                    <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
                       <FormField
                         control={form.control}
                         name="nome"
                         render={({ field }) => (
-                          <FormItem className="md:col-span-2">
-                            <FormLabel>Nome completo</FormLabel>
+                          <FormItem className="sm:col-span-2">
+                            <FormLabel className="text-sm sm:text-base">Nome completo</FormLabel>
                             <FormControl>
-                              <Input placeholder="Seu nome completo" {...field} />
+                              <Input placeholder="Seu nome completo" {...field} className="h-10 sm:h-11" />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -289,9 +289,9 @@ const CheckoutForm = ({ initialPlan = "crescimento", onBack, onSuccess }: Checko
                         name="cpfCnpj"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>CPF/CNPJ</FormLabel>
+                            <FormLabel className="text-sm sm:text-base">CPF/CNPJ</FormLabel>
                             <FormControl>
-                              <Input placeholder="000.000.000-00" {...field} />
+                              <Input placeholder="000.000.000-00" {...field} className="h-10 sm:h-11" />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -303,12 +303,13 @@ const CheckoutForm = ({ initialPlan = "crescimento", onBack, onSuccess }: Checko
                         name="email"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>E-mail</FormLabel>
+                            <FormLabel className="text-sm sm:text-base">E-mail</FormLabel>
                             <FormControl>
                               <Input
                                 type="email"
                                 placeholder="seu@email.com"
                                 {...field}
+                                className="h-10 sm:h-11"
                               />
                             </FormControl>
                             <FormMessage />
@@ -431,8 +432,8 @@ const CheckoutForm = ({ initialPlan = "crescimento", onBack, onSuccess }: Checko
                   </div>
 
                   {/* Payment */}
-                  <div className="bg-card rounded-xl p-6 shadow-medium">
-                    <h2 className="text-xl font-bold text-foreground mb-4">
+                  <div className="bg-card rounded-lg sm:rounded-xl p-4 sm:p-6 shadow-medium">
+                    <h2 className="text-lg sm:text-xl font-bold text-foreground mb-3 sm:mb-4">
                       3. Forma de pagamento
                     </h2>
 
@@ -445,10 +446,10 @@ const CheckoutForm = ({ initialPlan = "crescimento", onBack, onSuccess }: Checko
                             <RadioGroup
                               onValueChange={field.onChange}
                               defaultValue={field.value}
-                              className="grid md:grid-cols-2 gap-4"
+                              className="grid sm:grid-cols-2 gap-3 sm:gap-4"
                             >
                               <div
-                                className={`flex items-center gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${
+                                className={`flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg sm:rounded-xl border-2 cursor-pointer transition-all ${
                                   field.value === "cartao"
                                     ? "border-secondary bg-secondary/5"
                                     : "border-border hover:border-primary/50"
@@ -456,16 +457,16 @@ const CheckoutForm = ({ initialPlan = "crescimento", onBack, onSuccess }: Checko
                                 onClick={() => field.onChange("cartao")}
                               >
                                 <RadioGroupItem value="cartao" id="cartao" />
-                                <div className="flex items-center gap-3">
-                                  <CreditCard className="w-6 h-6 text-primary" />
+                                <div className="flex items-center gap-2 sm:gap-3">
+                                  <CreditCard className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                                   <div>
                                     <Label
                                       htmlFor="cartao"
-                                      className="font-semibold cursor-pointer"
+                                      className="font-semibold cursor-pointer text-sm sm:text-base"
                                     >
                                       Cartão de Crédito
                                     </Label>
-                                    <p className="text-sm text-muted-foreground">
+                                    <p className="text-xs sm:text-sm text-muted-foreground">
                                       Até 12x sem juros
                                     </p>
                                   </div>
@@ -473,7 +474,7 @@ const CheckoutForm = ({ initialPlan = "crescimento", onBack, onSuccess }: Checko
                               </div>
 
                               <div
-                                className={`flex items-center gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${
+                                className={`flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg sm:rounded-xl border-2 cursor-pointer transition-all ${
                                   field.value === "pix"
                                     ? "border-secondary bg-secondary/5"
                                     : "border-border hover:border-primary/50"
@@ -481,18 +482,18 @@ const CheckoutForm = ({ initialPlan = "crescimento", onBack, onSuccess }: Checko
                                 onClick={() => field.onChange("pix")}
                               >
                                 <RadioGroupItem value="pix" id="pix" />
-                                <div className="flex items-center gap-3">
-                                  <div className="w-6 h-6 bg-primary rounded flex items-center justify-center text-primary-foreground text-xs font-bold">
+                                <div className="flex items-center gap-2 sm:gap-3">
+                                  <div className="w-5 h-5 sm:w-6 sm:h-6 bg-primary rounded flex items-center justify-center text-primary-foreground text-xs font-bold">
                                     PIX
                                   </div>
                                   <div>
                                     <Label
                                       htmlFor="pix"
-                                      className="font-semibold cursor-pointer"
+                                      className="font-semibold cursor-pointer text-sm sm:text-base"
                                     >
                                       PIX
                                     </Label>
-                                    <p className="text-sm text-muted-foreground">
+                                    <p className="text-xs sm:text-sm text-muted-foreground">
                                       Pagamento à vista
                                     </p>
                                   </div>
@@ -539,15 +540,14 @@ const CheckoutForm = ({ initialPlan = "crescimento", onBack, onSuccess }: Checko
                       />
                     )}
 
-                    <p className="text-sm text-muted-foreground mt-4 flex items-center gap-2">
-                      <Lock className="w-4 h-4" />
-                      Pagamento processado com segurança. Seus dados estão
-                      protegidos.
+                    <p className="text-xs sm:text-sm text-muted-foreground mt-3 sm:mt-4 flex items-center gap-2">
+                      <Lock className="w-3 h-3 sm:w-4 sm:h-4" />
+                      Pagamento processado com segurança. Seus dados estão protegidos.
                     </p>
                   </div>
 
                   {/* Terms */}
-                  <div className="bg-card rounded-xl p-6 shadow-medium">
+                  <div className="bg-card rounded-lg sm:rounded-xl p-4 sm:p-6 shadow-medium">
                     <FormField
                       control={form.control}
                       name="termos"
@@ -560,7 +560,7 @@ const CheckoutForm = ({ initialPlan = "crescimento", onBack, onSuccess }: Checko
                             />
                           </FormControl>
                           <div className="space-y-1 leading-none">
-                            <FormLabel className="cursor-pointer">
+                            <FormLabel className="cursor-pointer text-sm sm:text-base">
                               Li e aceito os{" "}
                               <a
                                 href="/termos"
@@ -588,49 +588,49 @@ const CheckoutForm = ({ initialPlan = "crescimento", onBack, onSuccess }: Checko
 
                 {/* Right column - Order summary */}
                 <div className="lg:col-span-1">
-                  <div className="bg-card rounded-xl p-6 shadow-medium sticky top-24">
-                    <h2 className="text-xl font-bold text-foreground mb-4">
+                  <div className="bg-card rounded-lg sm:rounded-xl p-4 sm:p-6 shadow-medium sticky top-24">
+                    <h2 className="text-lg sm:text-xl font-bold text-foreground mb-3 sm:mb-4">
                       Resumo do Pedido
                     </h2>
 
                     {selectedPlan && (
                       <>
-                        <div className="border-b border-border pb-4 mb-4">
-                          <p className="font-semibold text-foreground">
+                        <div className="border-b border-border pb-3 sm:pb-4 mb-3 sm:mb-4">
+                          <p className="font-semibold text-foreground text-sm sm:text-base">
                             {selectedPlan.nome}
                           </p>
-                          <p className="text-2xl font-bold text-primary mt-1">
+                          <p className="text-xl sm:text-2xl font-bold text-primary mt-1">
                             {selectedPlan.precoFormatado}
                           </p>
-                          <p className="text-sm text-muted-foreground">
+                          <p className="text-xs sm:text-sm text-muted-foreground">
                             {selectedPlan.parcela}
                           </p>
                         </div>
 
-                        <div className="space-y-3 mb-6">
-                          <p className="font-semibold text-foreground flex items-center gap-2">
-                            <Gift className="w-4 h-4 text-secondary" />
+                        <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
+                          <p className="font-semibold text-foreground flex items-center gap-2 text-sm sm:text-base">
+                            <Gift className="w-3 h-3 sm:w-4 sm:h-4 text-secondary" />
                             Bônus inclusos:
                           </p>
                           {selectedPlan.bonus.map((item, index) => (
                             <div
                               key={index}
-                              className="flex items-start gap-2 text-sm text-muted-foreground"
+                              className="flex items-start gap-2 text-xs sm:text-sm text-muted-foreground"
                             >
-                              <CheckCircle className="w-4 h-4 text-secondary flex-shrink-0 mt-0.5" />
+                              <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-secondary flex-shrink-0 mt-0.5" />
                               <span>{item}</span>
                             </div>
                           ))}
                         </div>
 
-                        <div className="bg-secondary/10 border border-secondary/30 rounded-lg p-4 mb-6">
+                        <div className="bg-secondary/10 border border-secondary/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
                           <div className="flex items-center gap-2 text-secondary">
-                            <Shield className="w-5 h-5" />
-                            <span className="font-semibold">
+                            <Shield className="w-4 h-4 sm:w-5 sm:h-5" />
+                            <span className="font-semibold text-sm sm:text-base">
                               Garantia de 7 dias
                             </span>
                           </div>
-                          <p className="text-sm text-secondary/80 mt-1">
+                          <p className="text-xs sm:text-sm text-secondary/80 mt-1">
                             Se não gostar, devolvemos 100% do seu dinheiro.
                           </p>
                         </div>
@@ -641,25 +641,26 @@ const CheckoutForm = ({ initialPlan = "crescimento", onBack, onSuccess }: Checko
                       type="submit"
                       size="lg"
                       disabled={isSubmitting}
-                      className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground h-14 text-lg font-bold"
+                      className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground h-12 sm:h-14 text-sm sm:text-base md:text-lg font-bold"
                     >
                       {isSubmitting ? (
                         "Processando..."
                       ) : (
                         <>
-                          <Lock className="mr-2 h-5 w-5" />
-                          FINALIZAR COMPRA
+                          <Lock className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                          <span className="hidden sm:inline">FINALIZAR COMPRA</span>
+                          <span className="sm:hidden">FINALIZAR</span>
                         </>
                       )}
                     </Button>
 
-                    <div className="flex items-center justify-center gap-4 mt-4 text-xs text-muted-foreground">
+                    <div className="flex items-center justify-center gap-3 sm:gap-4 mt-3 sm:mt-4 text-xs text-muted-foreground">
                       <div className="flex items-center gap-1">
-                        <Shield className="w-4 h-4" />
+                        <Shield className="w-3 h-3 sm:w-4 sm:h-4" />
                         <span>Compra segura</span>
                       </div>
                       <div className="flex items-center gap-1">
-                        <Lock className="w-4 h-4" />
+                        <Lock className="w-3 h-3 sm:w-4 sm:h-4" />
                         <span>Dados protegidos</span>
                       </div>
                     </div>

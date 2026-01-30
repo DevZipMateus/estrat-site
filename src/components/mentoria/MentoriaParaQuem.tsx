@@ -16,35 +16,35 @@ const naoParaQuem = [
 
 const MentoriaParaQuem = () => {
   return (
-    <section className="py-20 bg-muted">
-      <div className="container mx-auto px-4">
+    <section className="py-12 sm:py-16 md:py-20 bg-muted">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
             {/* Para quem é */}
-            <div className="bg-background rounded-2xl p-8 shadow-medium border border-primary/20">
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8">
+            <div className="bg-background rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-medium border border-primary/20">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-6 sm:mb-8">
                 Essa Mentoria é Para Você Se...
               </h2>
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {paraQuem.map((item, index) => (
-                  <div key={index} className="flex items-start gap-4">
-                    <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
-                    <p className="text-foreground text-lg">{item}</p>
+                  <div key={index} className="flex items-start gap-3 sm:gap-4">
+                    <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-secondary flex-shrink-0 mt-0.5" />
+                    <p className="text-foreground text-sm sm:text-base md:text-lg">{item}</p>
                   </div>
                 ))}
               </div>
             </div>
             
             {/* Para quem NÃO é */}
-            <div className="bg-background rounded-2xl p-8 shadow-medium border border-destructive/20">
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8">
+            <div className="bg-background rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-medium border border-destructive/20">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-6 sm:mb-8">
                 Essa Mentoria NÃO é Para Você Se...
               </h2>
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {naoParaQuem.map((item, index) => (
-                  <div key={index} className="flex items-start gap-4">
-                    <XCircle className="w-6 h-6 text-destructive flex-shrink-0 mt-0.5" />
-                    <p className="text-foreground text-lg">{item}</p>
+                  <div key={index} className="flex items-start gap-3 sm:gap-4">
+                    <XCircle className="w-5 h-5 sm:w-6 sm:h-6 text-destructive flex-shrink-0 mt-0.5" />
+                    <p className="text-foreground text-sm sm:text-base md:text-lg">{item}</p>
                   </div>
                 ))}
               </div>
