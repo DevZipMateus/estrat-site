@@ -214,11 +214,11 @@ const WebinarRegistrationForm = ({ onSuccess }: WebinarRegistrationFormProps) =>
                     {isSubmitting ? (
                       "Enviando..."
                     ) : (
-                      <span className="flex w-full min-w-0 flex-wrap items-center justify-center gap-2 text-center leading-snug break-words">
+                      <span className="flex w-full min-w-0 flex-wrap items-center justify-center gap-1 text-center leading-snug">
                         <span className="hidden md:inline">GARANTIR MINHA VAGA NO WEBINAR GRATUITO</span>
-                        <span className="hidden sm:inline md:hidden">GARANTIR MINHA VAGA NO WEBINAR</span>
-                        <span className="sm:hidden">GARANTIR MINHA VAGA</span>
-                        <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 transition-transform group-hover:translate-x-1" />
+                        <span className="hidden sm:inline md:hidden">GARANTIR VAGA GRATUITA</span>
+                        <span className="sm:hidden">VAGA GRATUITA</span>
+                        <ArrowRight className="inline-block h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 transition-transform group-hover:translate-x-1" />
                       </span>
                     )}
                   </Button>
