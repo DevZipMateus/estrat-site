@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Form,
@@ -16,19 +15,9 @@ import {
 } from "@/components/ui/form";
 import { Label } from "@/components/ui/label";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
   CheckCircle,
-  CreditCard,
-  Shield,
-  Lock,
-  Gift,
   ArrowLeft,
+  MessageCircle,
 } from "lucide-react";
 
 const planos = [
@@ -76,55 +65,11 @@ const checkoutSchema = z.object({
     .trim()
     .min(2, { message: "Nome deve ter pelo menos 2 caracteres" })
     .max(100, { message: "Nome deve ter no máximo 100 caracteres" }),
-  cpfCnpj: z
-    .string()
-    .trim()
-    .min(11, { message: "CPF/CNPJ inválido" })
-    .max(18, { message: "CPF/CNPJ inválido" }),
-  email: z
-    .string()
-    .trim()
-    .email({ message: "E-mail inválido" })
-    .max(255, { message: "E-mail deve ter no máximo 255 caracteres" }),
   telefone: z
     .string()
     .trim()
     .min(10, { message: "Telefone deve ter pelo menos 10 dígitos" })
     .max(15, { message: "Telefone deve ter no máximo 15 dígitos" }),
-  cep: z
-    .string()
-    .trim()
-    .min(8, { message: "CEP inválido" })
-    .max(9, { message: "CEP inválido" }),
-  endereco: z
-    .string()
-    .trim()
-    .min(5, { message: "Endereço deve ter pelo menos 5 caracteres" })
-    .max(200, { message: "Endereço deve ter no máximo 200 caracteres" }),
-  numero: z.string().trim().min(1, { message: "Número obrigatório" }),
-  complemento: z.string().optional(),
-  bairro: z
-    .string()
-    .trim()
-    .min(2, { message: "Bairro obrigatório" })
-    .max(100, { message: "Bairro deve ter no máximo 100 caracteres" }),
-  cidade: z
-    .string()
-    .trim()
-    .min(2, { message: "Cidade obrigatória" })
-    .max(100, { message: "Cidade deve ter no máximo 100 caracteres" }),
-  estado: z
-    .string()
-    .trim()
-    .min(2, { message: "Estado obrigatório" })
-    .max(2, { message: "Use a sigla do estado" }),
-  formaPagamento: z.enum(["cartao", "pix"], {
-    required_error: "Selecione a forma de pagamento",
-  }),
-  parcelas: z.string().optional(),
-  termos: z.boolean().refine((val) => val === true, {
-    message: "Você deve aceitar os termos de uso",
-  }),
 });
 
 type CheckoutFormData = z.infer<typeof checkoutSchema>;
@@ -132,7 +77,7 @@ type CheckoutFormData = z.infer<typeof checkoutSchema>;
 interface CheckoutFormProps {
   initialPlan?: string;
   onBack: () => void;
-  onSuccess: (data: CheckoutFormData) => void;
+  onSuccess: (data: CheckoutFormData & { planoNome: string }) => void;
 }
 
 const CheckoutForm = ({ initialPlan = "crescimento", onBack, onSuccess }: CheckoutFormProps) => {
@@ -143,42 +88,33 @@ const CheckoutForm = ({ initialPlan = "crescimento", onBack, onSuccess }: Checko
     defaultValues: {
       plano: initialPlan,
       nome: "",
-      cpfCnpj: "",
-      email: "",
       telefone: "",
-      cep: "",
-      endereco: "",
-      numero: "",
-      complemento: "",
-      bairro: "",
-      cidade: "",
-      estado: "",
-      formaPagamento: "cartao",
-      parcelas: "12",
-      termos: false,
     },
   });
 
   const selectedPlanId = form.watch("plano");
-  const formaPagamento = form.watch("formaPagamento");
   const selectedPlan = planos.find((p) => p.id === selectedPlanId);
 
   const handleSubmit = async (data: CheckoutFormData) => {
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    
+    const planoNome = selectedPlan?.nome || "Mentoria";
+    
+    // Redirecionar para WhatsApp com mensagem
+    const mensagem = encodeURIComponent(
+      `Olá! Tenho interesse no ${planoNome} da Mentoria Crescimento Estratégico 90 Dias.\n\nMeu nome é ${data.nome} e meu telefone é ${data.telefone}.\n\nGostaria de mais informações, por favor!`
+    );
+    
+    window.open(`https://wa.me/5561999840109?text=${mensagem}`, '_blank');
+    
     setIsSubmitting(false);
-    onSuccess(data);
-  };
-
-  const getParcelaValue = (preco: number, parcelas: number) => {
-    return (preco / parcelas).toFixed(2).replace(".", ",");
+    onSuccess({ ...data, planoNome });
   };
 
   return (
     <section className="py-12 sm:py-16 md:py-20 bg-muted min-h-screen">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-2xl mx-auto">
           {/* Back button */}
           <Button
             variant="ghost"
@@ -189,484 +125,161 @@ const CheckoutForm = ({ initialPlan = "crescimento", onBack, onSuccess }: Checko
             Voltar para os planos
           </Button>
 
-          <h1 className="text-2xl sm:text-3xl font-bold text-foreground text-center mb-6 sm:mb-8">
-            Finalizar Inscrição
-          </h1>
+          <div className="text-center mb-6 sm:mb-8">
+            <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
+              Tenho Interesse na Mentoria
+            </h1>
+            <p className="text-muted-foreground text-sm sm:text-base">
+              Preencha seus dados e entraremos em contato pelo WhatsApp com todas as informações
+            </p>
+          </div>
 
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(handleSubmit)}>
-              <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
-                {/* Left column - Form */}
-                <div className="lg:col-span-2 space-y-6 sm:space-y-8">
-                  {/* Plan selection */}
-                  <div className="bg-card rounded-lg sm:rounded-xl p-4 sm:p-6 shadow-medium">
-                    <h2 className="text-lg sm:text-xl font-bold text-foreground mb-3 sm:mb-4">
-                      1. Escolha seu plano
-                    </h2>
-                    <FormField
-                      control={form.control}
-                      name="plano"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormControl>
-                            <RadioGroup
-                              onValueChange={field.onChange}
-                              defaultValue={field.value}
-                              className="space-y-3"
-                            >
-                              {planos.map((plano) => (
-                                <div
-                                  key={plano.id}
-                                  className={`relative flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg sm:rounded-xl border-2 cursor-pointer transition-all ${
-                                    field.value === plano.id
-                                      ? "border-secondary bg-secondary/5"
-                                      : "border-border hover:border-primary/50"
-                                  }`}
-                                  onClick={() => field.onChange(plano.id)}
-                                >
-                                  {plano.badge && (
-                                    <div
-                                      className={`absolute -top-2 sm:-top-3 right-2 sm:right-4 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs font-bold ${
-                                        plano.destaque
-                                          ? "bg-secondary text-secondary-foreground"
-                                          : "bg-primary text-primary-foreground"
-                                      }`}
-                                    >
-                                      {plano.badge}
-                                    </div>
-                                  )}
-                                  <RadioGroupItem
-                                    value={plano.id}
-                                    id={plano.id}
-                                    className="mt-1"
-                                  />
-                                  <div className="flex-1">
-                                    <Label
-                                      htmlFor={plano.id}
-                                      className="font-bold text-foreground cursor-pointer text-sm sm:text-base"
-                                    >
-                                      {plano.nome}
-                                    </Label>
-                                    <p className="text-base sm:text-lg font-bold text-primary mt-1">
-                                      {plano.precoFormatado}{" "}
-                                      <span className="text-xs sm:text-sm font-normal text-muted-foreground">
-                                        {plano.parcela}
-                                      </span>
-                                    </p>
-                                  </div>
-                                </div>
-                              ))}
-                            </RadioGroup>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  {/* Personal data */}
-                  <div className="bg-card rounded-lg sm:rounded-xl p-4 sm:p-6 shadow-medium">
-                    <h2 className="text-lg sm:text-xl font-bold text-foreground mb-3 sm:mb-4">
-                      2. Dados pessoais
-                    </h2>
-                    <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
-                      <FormField
-                        control={form.control}
-                        name="nome"
-                        render={({ field }) => (
-                          <FormItem className="sm:col-span-2">
-                            <FormLabel className="text-sm sm:text-base">Nome completo</FormLabel>
-                            <FormControl>
-                              <Input placeholder="Seu nome completo" {...field} className="h-10 sm:h-11" />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <FormField
-                        control={form.control}
-                        name="cpfCnpj"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-sm sm:text-base">CPF/CNPJ</FormLabel>
-                            <FormControl>
-                              <Input placeholder="000.000.000-00" {...field} className="h-10 sm:h-11" />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <FormField
-                        control={form.control}
-                        name="email"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-sm sm:text-base">E-mail</FormLabel>
-                            <FormControl>
-                              <Input
-                                type="email"
-                                placeholder="seu@email.com"
-                                {...field}
-                                className="h-10 sm:h-11"
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <FormField
-                        control={form.control}
-                        name="telefone"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Telefone/WhatsApp</FormLabel>
-                            <FormControl>
-                              <Input placeholder="(61) 99999-9999" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <FormField
-                        control={form.control}
-                        name="cep"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>CEP</FormLabel>
-                            <FormControl>
-                              <Input placeholder="00000-000" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <FormField
-                        control={form.control}
-                        name="endereco"
-                        render={({ field }) => (
-                          <FormItem className="md:col-span-2">
-                            <FormLabel>Endereço</FormLabel>
-                            <FormControl>
-                              <Input placeholder="Rua, Avenida..." {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <FormField
-                        control={form.control}
-                        name="numero"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Número</FormLabel>
-                            <FormControl>
-                              <Input placeholder="123" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <FormField
-                        control={form.control}
-                        name="complemento"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Complemento (opcional)</FormLabel>
-                            <FormControl>
-                              <Input placeholder="Apto, Sala..." {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <FormField
-                        control={form.control}
-                        name="bairro"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Bairro</FormLabel>
-                            <FormControl>
-                              <Input placeholder="Seu bairro" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <FormField
-                        control={form.control}
-                        name="cidade"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Cidade</FormLabel>
-                            <FormControl>
-                              <Input placeholder="Sua cidade" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <FormField
-                        control={form.control}
-                        name="estado"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Estado</FormLabel>
-                            <FormControl>
-                              <Input placeholder="DF" maxLength={2} {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Payment */}
-                  <div className="bg-card rounded-lg sm:rounded-xl p-4 sm:p-6 shadow-medium">
-                    <h2 className="text-lg sm:text-xl font-bold text-foreground mb-3 sm:mb-4">
-                      3. Forma de pagamento
-                    </h2>
-
-                    <FormField
-                      control={form.control}
-                      name="formaPagamento"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormControl>
-                            <RadioGroup
-                              onValueChange={field.onChange}
-                              defaultValue={field.value}
-                              className="grid sm:grid-cols-2 gap-3 sm:gap-4"
-                            >
-                              <div
-                                className={`flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg sm:rounded-xl border-2 cursor-pointer transition-all ${
-                                  field.value === "cartao"
-                                    ? "border-secondary bg-secondary/5"
-                                    : "border-border hover:border-primary/50"
-                                }`}
-                                onClick={() => field.onChange("cartao")}
-                              >
-                                <RadioGroupItem value="cartao" id="cartao" />
-                                <div className="flex items-center gap-2 sm:gap-3">
-                                  <CreditCard className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
-                                  <div>
-                                    <Label
-                                      htmlFor="cartao"
-                                      className="font-semibold cursor-pointer text-sm sm:text-base"
-                                    >
-                                      Cartão de Crédito
-                                    </Label>
-                                    <p className="text-xs sm:text-sm text-muted-foreground">
-                                      Até 12x sem juros
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div
-                                className={`flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg sm:rounded-xl border-2 cursor-pointer transition-all ${
-                                  field.value === "pix"
-                                    ? "border-secondary bg-secondary/5"
-                                    : "border-border hover:border-primary/50"
-                                }`}
-                                onClick={() => field.onChange("pix")}
-                              >
-                                <RadioGroupItem value="pix" id="pix" />
-                                <div className="flex items-center gap-2 sm:gap-3">
-                                  <div className="w-5 h-5 sm:w-6 sm:h-6 bg-primary rounded flex items-center justify-center text-primary-foreground text-xs font-bold">
-                                    PIX
-                                  </div>
-                                  <div>
-                                    <Label
-                                      htmlFor="pix"
-                                      className="font-semibold cursor-pointer text-sm sm:text-base"
-                                    >
-                                      PIX
-                                    </Label>
-                                    <p className="text-xs sm:text-sm text-muted-foreground">
-                                      Pagamento à vista
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </RadioGroup>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    {formaPagamento === "cartao" && selectedPlan && (
-                      <FormField
-                        control={form.control}
-                        name="parcelas"
-                        render={({ field }) => (
-                          <FormItem className="mt-4">
-                            <FormLabel>Número de parcelas</FormLabel>
-                            <Select
-                              onValueChange={field.onChange}
-                              defaultValue={field.value}
-                            >
-                              <FormControl>
-                                <SelectTrigger>
-                                  <SelectValue placeholder="Selecione as parcelas" />
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent>
-                                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(
-                                  (num) => (
-                                    <SelectItem key={num} value={String(num)}>
-                                      {num}x de R${" "}
-                                      {getParcelaValue(selectedPlan.preco, num)}{" "}
-                                      {num === 1 ? "(à vista)" : "sem juros"}
-                                    </SelectItem>
-                                  )
-                                )}
-                              </SelectContent>
-                            </Select>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    )}
-
-                    <p className="text-xs sm:text-sm text-muted-foreground mt-3 sm:mt-4 flex items-center gap-2">
-                      <Lock className="w-3 h-3 sm:w-4 sm:h-4" />
-                      Pagamento processado com segurança. Seus dados estão protegidos.
-                    </p>
-                  </div>
-
-                  {/* Terms */}
-                  <div className="bg-card rounded-lg sm:rounded-xl p-4 sm:p-6 shadow-medium">
-                    <FormField
-                      control={form.control}
-                      name="termos"
-                      render={({ field }) => (
-                        <FormItem className="flex items-start space-x-3 space-y-0">
-                          <FormControl>
-                            <Checkbox
-                              checked={field.value}
-                              onCheckedChange={field.onChange}
-                            />
-                          </FormControl>
-                          <div className="space-y-1 leading-none">
-                            <FormLabel className="cursor-pointer text-sm sm:text-base">
-                              Li e aceito os{" "}
-                              <a
-                                href="/termos"
-                                target="_blank"
-                                className="text-primary underline"
-                              >
-                                Termos de Uso
-                              </a>{" "}
-                              e a{" "}
-                              <a
-                                href="/privacidade"
-                                target="_blank"
-                                className="text-primary underline"
-                              >
-                                Política de Privacidade
-                              </a>
-                            </FormLabel>
-                            <FormMessage />
-                          </div>
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </div>
-
-                {/* Right column - Order summary */}
-                <div className="lg:col-span-1">
-                  <div className="bg-card rounded-lg sm:rounded-xl p-4 sm:p-6 shadow-medium sticky top-24">
-                    <h2 className="text-lg sm:text-xl font-bold text-foreground mb-3 sm:mb-4">
-                      Resumo do Pedido
-                    </h2>
-
-                    {selectedPlan && (
-                      <>
-                        <div className="border-b border-border pb-3 sm:pb-4 mb-3 sm:mb-4">
-                          <p className="font-semibold text-foreground text-sm sm:text-base">
-                            {selectedPlan.nome}
-                          </p>
-                          <p className="text-xl sm:text-2xl font-bold text-primary mt-1">
-                            {selectedPlan.precoFormatado}
-                          </p>
-                          <p className="text-xs sm:text-sm text-muted-foreground">
-                            {selectedPlan.parcela}
-                          </p>
-                        </div>
-
-                        <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
-                          <p className="font-semibold text-foreground flex items-center gap-2 text-sm sm:text-base">
-                            <Gift className="w-3 h-3 sm:w-4 sm:h-4 text-secondary" />
-                            Bônus inclusos:
-                          </p>
-                          {selectedPlan.bonus.map((item, index) => (
+            <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
+              {/* Plan selection */}
+              <div className="bg-card rounded-lg sm:rounded-xl p-4 sm:p-6 shadow-medium">
+                <h2 className="text-lg sm:text-xl font-bold text-foreground mb-3 sm:mb-4">
+                  1. Escolha o plano de interesse
+                </h2>
+                <FormField
+                  control={form.control}
+                  name="plano"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <RadioGroup
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                          className="space-y-3"
+                        >
+                          {planos.map((plano) => (
                             <div
-                              key={index}
-                              className="flex items-start gap-2 text-xs sm:text-sm text-muted-foreground"
+                              key={plano.id}
+                              className={`relative flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg sm:rounded-xl border-2 cursor-pointer transition-all ${
+                                field.value === plano.id
+                                  ? "border-secondary bg-secondary/5"
+                                  : "border-border hover:border-primary/50"
+                              }`}
+                              onClick={() => field.onChange(plano.id)}
                             >
-                              <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-secondary flex-shrink-0 mt-0.5" />
-                              <span>{item}</span>
+                              {plano.badge && (
+                                <div
+                                  className={`absolute -top-2 sm:-top-3 right-2 sm:right-4 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs font-bold ${
+                                    plano.destaque
+                                      ? "bg-secondary text-secondary-foreground"
+                                      : "bg-primary text-primary-foreground"
+                                  }`}
+                                >
+                                  {plano.badge}
+                                </div>
+                              )}
+                              <RadioGroupItem
+                                value={plano.id}
+                                id={plano.id}
+                                className="mt-1"
+                              />
+                              <div className="flex-1">
+                                <Label
+                                  htmlFor={plano.id}
+                                  className="font-bold text-foreground cursor-pointer text-sm sm:text-base"
+                                >
+                                  {plano.nome}
+                                </Label>
+                                <p className="text-base sm:text-lg font-bold text-primary mt-1">
+                                  {plano.precoFormatado}{" "}
+                                  <span className="text-xs sm:text-sm font-normal text-muted-foreground">
+                                    {plano.parcela}
+                                  </span>
+                                </p>
+                                <ul className="mt-2 space-y-1">
+                                  {plano.bonus.map((item, idx) => (
+                                    <li key={idx} className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+                                      <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-secondary flex-shrink-0" />
+                                      {item}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
                             </div>
                           ))}
-                        </div>
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
-                        <div className="bg-secondary/10 border border-secondary/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
-                          <div className="flex items-center gap-2 text-secondary">
-                            <Shield className="w-4 h-4 sm:w-5 sm:h-5" />
-                            <span className="font-semibold text-sm sm:text-base">
-                              Garantia de 7 dias
-                            </span>
-                          </div>
-                          <p className="text-xs sm:text-sm text-secondary/80 mt-1">
-                            Se não gostar, devolvemos 100% do seu dinheiro.
-                          </p>
-                        </div>
-                      </>
+              {/* Personal data - simplified */}
+              <div className="bg-card rounded-lg sm:rounded-xl p-4 sm:p-6 shadow-medium">
+                <h2 className="text-lg sm:text-xl font-bold text-foreground mb-3 sm:mb-4">
+                  2. Seus dados
+                </h2>
+                <div className="space-y-4">
+                  <FormField
+                    control={form.control}
+                    name="nome"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm sm:text-base">Nome completo</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Seu nome completo" {...field} className="h-10 sm:h-11" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
                     )}
+                  />
 
-                    <Button
-                      type="submit"
-                      size="lg"
-                      disabled={isSubmitting}
-                      className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground h-12 sm:h-14 text-sm sm:text-base md:text-lg font-bold"
-                    >
-                      {isSubmitting ? (
-                        "Processando..."
-                      ) : (
-                        <>
-                          <Lock className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                          <span className="hidden sm:inline">FINALIZAR COMPRA</span>
-                          <span className="sm:hidden">FINALIZAR</span>
-                        </>
-                      )}
-                    </Button>
+                  <FormField
+                    control={form.control}
+                    name="telefone"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm sm:text-base">Telefone/WhatsApp</FormLabel>
+                        <FormControl>
+                          <Input placeholder="(61) 99999-9999" {...field} className="h-10 sm:h-11" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              </div>
 
-                    <div className="flex items-center justify-center gap-3 sm:gap-4 mt-3 sm:mt-4 text-xs text-muted-foreground">
-                      <div className="flex items-center gap-1">
-                        <Shield className="w-3 h-3 sm:w-4 sm:h-4" />
-                        <span>Compra segura</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Lock className="w-3 h-3 sm:w-4 sm:h-4" />
-                        <span>Dados protegidos</span>
-                      </div>
-                    </div>
+              {/* Info message */}
+              <div className="bg-primary/10 border border-primary/20 rounded-lg sm:rounded-xl p-4 sm:p-5">
+                <div className="flex items-start gap-3">
+                  <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6 text-primary flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-foreground text-sm sm:text-base">
+                      Próximos passos
+                    </p>
+                    <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                      Após enviar seus dados, você será redirecionado(a) para o WhatsApp onde nossa equipe entrará em contato com todas as informações sobre a mentoria, formas de pagamento e próximas turmas.
+                    </p>
                   </div>
                 </div>
               </div>
+
+              {/* Submit button */}
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground h-auto min-h-12 sm:min-h-14 py-3 sm:py-4 px-4 sm:px-6 rounded-xl shadow-md hover:shadow-strong transition-all duration-200 text-sm sm:text-base md:text-lg font-extrabold group"
+              >
+                {isSubmitting ? (
+                  "Enviando..."
+                ) : (
+                  <span className="flex items-center gap-2">
+                    <MessageCircle className="w-5 h-5" />
+                    QUERO MAIS INFORMAÇÕES NO WHATSAPP
+                  </span>
+                )}
+              </Button>
+
+              <p className="text-xs text-muted-foreground text-center">
+                🔒 Seus dados estão seguros. Não enviamos spam.
+              </p>
             </form>
           </Form>
         </div>
