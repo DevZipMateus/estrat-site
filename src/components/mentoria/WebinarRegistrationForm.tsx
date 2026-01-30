@@ -209,14 +209,14 @@ const WebinarRegistrationForm = ({ onSuccess }: WebinarRegistrationFormProps) =>
                     type="submit"
                     size="lg"
                     disabled={isSubmitting}
-                    className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground h-auto min-h-12 sm:min-h-14 py-3 sm:py-4 text-xs sm:text-sm md:text-base font-bold group mt-2 sm:mt-4"
+                    className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground h-auto min-h-12 sm:min-h-14 py-3 sm:py-4 text-xs sm:text-sm md:text-base font-bold group mt-2 sm:mt-4 whitespace-normal flex-wrap"
                   >
                     {isSubmitting ? (
                       "Enviando..."
                     ) : (
-                      <span className="flex items-center justify-center gap-2 text-center leading-tight">
+                      <span className="flex w-full min-w-0 flex-wrap items-center justify-center gap-2 text-center leading-snug break-words">
                         <span className="hidden md:inline">GARANTIR MINHA VAGA NO WEBINAR GRATUITO</span>
-                        <span className="hidden sm:inline md:hidden">GARANTIR MINHA VAGA GRATUITA</span>
+                        <span className="hidden sm:inline md:hidden">GARANTIR MINHA VAGA NO WEBINAR</span>
                         <span className="sm:hidden">GARANTIR MINHA VAGA</span>
                         <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 transition-transform group-hover:translate-x-1" />
                       </span>
