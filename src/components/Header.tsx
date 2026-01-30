@@ -37,7 +37,7 @@ const Header = () => {
             /* Menu para página da Mentoria */
             <div className="flex items-center gap-4">
               <Link to="/">
-                <Button variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
+                <Button className="bg-primary-foreground text-primary hover:bg-primary-foreground/90">
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Voltar ao Site
                 </Button>
