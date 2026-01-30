@@ -1,3 +1,4 @@
+import Header from "@/components/Header";
 import MentoriaHero from "@/components/mentoria/MentoriaHero";
 import MentoriaProblema from "@/components/mentoria/MentoriaProblema";
 import MentoriaSolucao from "@/components/mentoria/MentoriaSolucao";
@@ -18,6 +19,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 const Mentoria = () => {
   return (
     <div className="min-h-screen bg-background">
+      <Header />
       <MentoriaUrgencyBar />
       <MentoriaHero />
       <MentoriaProblema />
