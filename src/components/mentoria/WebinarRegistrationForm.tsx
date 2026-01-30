@@ -209,16 +209,17 @@ const WebinarRegistrationForm = ({ onSuccess }: WebinarRegistrationFormProps) =>
                     type="submit"
                     size="lg"
                     disabled={isSubmitting}
-                    className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground h-auto min-h-12 sm:min-h-14 py-3 sm:py-4 text-xs sm:text-sm md:text-base font-bold group mt-2 sm:mt-4 whitespace-normal flex-wrap"
+                    className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground h-auto min-h-12 sm:min-h-14 py-3 sm:py-4 px-4 sm:px-6 rounded-xl shadow-md hover:shadow-strong transition-all duration-200 text-sm sm:text-base md:text-lg font-extrabold md:tracking-wide group mt-2 sm:mt-4 whitespace-normal"
                   >
                     {isSubmitting ? (
                       "Enviando..."
                     ) : (
-                      <span className="flex w-full min-w-0 flex-wrap items-center justify-center gap-1 text-center leading-snug">
-                        <span className="hidden md:inline">GARANTIR MINHA VAGA NO WEBINAR GRATUITO</span>
-                        <span className="hidden sm:inline md:hidden">GARANTIR VAGA GRATUITA</span>
-                        <span className="sm:hidden">VAGA GRATUITA</span>
-                        <ArrowRight className="inline-block h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 transition-transform group-hover:translate-x-1" />
+                      <span className="flex w-full min-w-0 flex-col items-center justify-center gap-1 text-center leading-tight">
+                        <span className="px-1">GARANTIR MINHA VAGA NO WEBINAR</span>
+                        <span className="inline-flex items-center gap-2">
+                          <span className="underline underline-offset-4 decoration-secondary-foreground/40">GRATUITO</span>
+                          <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 transition-transform group-hover:translate-x-1" />
+                        </span>
                       </span>
                     )}
                   </Button>
