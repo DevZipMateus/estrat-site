@@ -271,7 +271,7 @@ const CheckoutForm = ({ initialPlan = "crescimento", onBack, onSuccess }: Checko
                 "Enviando..."
               ) : (
                 <span className="flex items-center gap-2">
-                  FINALIZAR PEDIDO
+                  GARANTIR MINHA VAGA
                 </span>
               )}
               </Button>
