@@ -44,17 +44,28 @@ const MentoriaSolucao = () => {
             O método completo para estruturar, organizar e escalar seu negócio em apenas 3 meses
           </p>
           
-          {/* Video placeholder */}
-          <div className="bg-muted rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 mb-8 sm:mb-12 max-w-3xl mx-auto">
-            <video 
-              className="w-full rounded-lg sm:rounded-xl aspect-video"
-              controls
-              preload="metadata"
-              poster=""
-            >
-              <source src="/WhatsApp%20Video%202026-02-05%20at%2010.45.06.mp4" type="video/mp4" />
-              Seu navegador não suporta a reprodução de vídeos.
-            </video>
+          {/* Videos */}
+          <div className="grid md:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-12 max-w-5xl mx-auto">
+            <div className="bg-muted rounded-xl sm:rounded-2xl p-3 sm:p-4">
+              <video 
+                className="w-full rounded-lg sm:rounded-xl aspect-video"
+                controls
+                preload="metadata"
+              >
+                <source src="/WhatsApp%20Video%202026-02-05%20at%2010.45.06.mp4" type="video/mp4" />
+                Seu navegador não suporta a reprodução de vídeos.
+              </video>
+            </div>
+            <div className="bg-muted rounded-xl sm:rounded-2xl p-3 sm:p-4">
+              <video 
+                className="w-full rounded-lg sm:rounded-xl aspect-video"
+                controls
+                preload="metadata"
+              >
+                <source src="/WhatsApp%20Video%202026-02-05%20at%2011.05.23.mp4" type="video/mp4" />
+                Seu navegador não suporta a reprodução de vídeos.
+              </video>
+            </div>
           </div>
           
           {/* 3 Pilares */}
