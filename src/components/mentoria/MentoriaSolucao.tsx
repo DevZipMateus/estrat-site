@@ -45,7 +45,7 @@ const MentoriaSolucao = () => {
           </p>
           
           {/* Video placeholder */}
-          <div className="bg-muted rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 mb-8 sm:mb-12 max-w-xl mx-auto">
+          <div className="bg-muted rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 mb-8 sm:mb-12 max-w-2xl mx-auto">
             <video 
               className="w-full rounded-lg sm:rounded-xl aspect-video"
               controls
