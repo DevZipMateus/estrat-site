@@ -46,14 +46,15 @@ const MentoriaSolucao = () => {
           
           {/* Video placeholder */}
           <div className="bg-muted rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 mb-8 sm:mb-12 max-w-3xl mx-auto">
-            <div className="aspect-video bg-gradient-to-br from-primary/10 to-secondary/10 rounded-lg sm:rounded-xl flex items-center justify-center border-2 border-dashed border-primary/30">
-              <div className="text-center p-4">
-                <div className="w-14 h-14 sm:w-16 md:w-20 sm:h-16 md:h-20 bg-primary/20 rounded-full mx-auto mb-3 sm:mb-4 flex items-center justify-center">
-                  <span className="text-2xl sm:text-3xl">▶️</span>
-                </div>
-                <p className="text-muted-foreground text-sm sm:text-base">Vídeo de apresentação da mentoria</p>
-              </div>
-            </div>
+            <video 
+              className="w-full rounded-lg sm:rounded-xl"
+              controls
+              preload="metadata"
+              poster=""
+            >
+              <source src="/WhatsApp Video 2026-02-05 at 10.45.06.mp4" type="video/mp4" />
+              Seu navegador não suporta a reprodução de vídeos.
+            </video>
           </div>
           
           {/* 3 Pilares */}
