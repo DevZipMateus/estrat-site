@@ -52,7 +52,7 @@ const MentoriaSolucao = () => {
               preload="metadata"
               poster=""
             >
-              <source src="/WhatsApp Video 2026-02-05 at 10.45.06.mp4" type="video/mp4" />
+              <source src="/WhatsApp%20Video%202026-02-05%20at%2010.45.06.mp4" type="video/mp4" />
               Seu navegador não suporta a reprodução de vídeos.
             </video>
           </div>
